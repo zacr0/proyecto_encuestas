@@ -95,4 +95,14 @@ class Consulta
 class Usuario{
 	
 }
+
+class Encuesta
+{
+	
+}
+
+class Pregunta
+{
+	
+}
 ?>
