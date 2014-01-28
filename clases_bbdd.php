@@ -92,4 +92,5 @@ class Consulta
 		return $filas;
 	}
 }
+// fran maricón
 ?>
