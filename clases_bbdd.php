@@ -92,5 +92,5 @@ class Consulta
 		return $filas;
 	}
 }
-// fran maricón
+// fran guapetón
 ?>
