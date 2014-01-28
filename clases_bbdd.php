@@ -103,6 +103,6 @@ class Encuesta
 
 class Pregunta
 {
-	//P
+	
 }
 ?>
