@@ -92,5 +92,7 @@ class Consulta
 		return $filas;
 	}
 }
-
+class Usuario{
+	
+}
 ?>
