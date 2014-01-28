@@ -93,16 +93,16 @@ class Consulta
 	}
 }
 class Usuario{
-	
+	//F
 }
 
 class Encuesta
 {
-	
+	// R
 }
 
 class Pregunta
 {
-	
+	//P
 }
 ?>
