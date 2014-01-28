@@ -92,17 +92,5 @@ class Consulta
 		return $filas;
 	}
 }
-class Usuario{
-	
-}
 
-class Encuesta
-{
-	// R
-}
-
-class Pregunta
-{
-	
-}
 ?>
