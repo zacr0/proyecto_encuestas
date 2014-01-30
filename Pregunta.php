@@ -1,10 +1,10 @@
 <?php
 class Pregunta {
-	var $id;
-	var $enunciado;
-	var $texto_ayuda;
-	var $tipo;
-	var $idEncuesta;
+	private $id;
+	private $enunciado;
+	private $texto_ayuda;
+	private $tipo;
+	private $idEncuesta;
 
 	public static function getPreguntas() {
 		$obj_pregunta = new Consulta();
@@ -14,7 +14,7 @@ class Pregunta {
 	}
 
 	// Constructor
-	function Pregunta($nro = 0) {
+	function __construct($nro = 0) {
 		if ($nro != 0) {
 			$obj_pregunta = new Consulta();
 			$resultado = $obj_pregunta -> ejecutarConsulta('SELECT * FROM Preguntas WHERE idPreguntas = $nro');
@@ -28,36 +28,36 @@ class Pregunta {
 	}
 
 	// GETTERS
-	function getID() {
+	public function getID() {
 		return $this -> id;
 	}
 
-	function getEnunciado() {
+	public function getEnunciado() {
 		return $this -> enunciado;
 	}
 
-	function getTextoAyuda() {
+	public function getTextoAyuda() {
 		return $this -> texto_ayuda;
 	}
 
-	function getTipo() {
+	public function getTipo() {
 		return $this -> tipo;
 	}
 
-	function getIdEncuesta() {
+	public function getIdEncuesta() {
 		return $this -> idEncuesta;
 	}
 
 	// SETTERS
-	function setEnunciado($valor) {
+	public function setEnunciado($valor) {
 		$this -> enunciado = $valor;
 	}
 
-	function setTextoAyuda($valor) {
+	public function setTextoAyuda($valor) {
 		$this -> texto_ayuda = $valor;
 	}
 
-	function setTipo() {
+	public function setTipo() {
 		$this -> tipo = $valor;
 	}
 
