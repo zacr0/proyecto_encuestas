@@ -1,6 +1,6 @@
 <?php
 require 'clases_bbdd.php';
-
+require 'Encuesta.php'
 class InstanciaEncuesta extends Encuesta
 {
 
