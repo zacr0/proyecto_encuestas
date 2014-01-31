@@ -18,7 +18,7 @@ class Usuario {
 
 	}
 
-	function Usuario($nro=0){
+	function __construct($nro=0){
 
 		if ($nro!=0){
 
