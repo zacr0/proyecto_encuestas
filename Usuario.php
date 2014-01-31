@@ -2,10 +2,10 @@
 
 class Usuario {
 
-	var $id;
-	var $nick;
-	var $pass;
-	var $nivel;
+	private $id;
+	private $nick;
+	private $pass;
+	private $nivel;
 
 	public static function getUsuarios(){
 
@@ -84,11 +84,12 @@ class Usuario {
 		$a=$comprueba->ejecutarConsulta($concomprueba);
 		$row= mysqli_fetch_array($a);
 		if($row["resul"]==0){
-		$obj_usuario=new Consulta();
-		$consulta="DELETE FROM `encuestas`.`usuarios` WHERE `usuarios`.`idUsuarios` = $this->id";
-		
+			$obj_usuario=new Consulta();
+			$consulta="DELETE FROM `encuestas`.`usuarios` WHERE `usuarios`.`idUsuarios` = $this->id";
+			$obj_usuario->ejecutarConsula($consulta);
+			return $obj_usuario->getAfectados();
 		}
-		}
+	}
 	
 	
 }
