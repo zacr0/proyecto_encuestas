@@ -14,7 +14,7 @@ class Pregunta {
 	}
 
 	// Constructor
-	function __construct($nro = 0) {
+	public function __construct($nro = 0) {
 		if ($nro != 0) {
 			$obj_pregunta = new Consulta();
 			$resultado = $obj_pregunta -> ejecutarConsulta('SELECT * FROM Preguntas WHERE idPreguntas = $nro');
@@ -62,7 +62,7 @@ class Pregunta {
 	}
 
 	// MANEJO DB
-	function guardar() {
+	public function guardar() {
 		if ($this -> id) {
 			$this -> actualizarPregunta();
 		} else {
@@ -70,7 +70,7 @@ class Pregunta {
 		}
 	}
 
-	function actualizarPregunta() {
+	public function actualizarPregunta() {
 		$obj_pregunta = new Consulta();
 		$consulta = "UPDATE Preguntas SET enunciado='$this->enunciado', textoAyuda='$this->texto_ayuda', tipo='$this->tipo' WHERE idPreguntas='$this->id' AND Encuestas_idEncuestas='$this->idEncuesta'";
 		$obj_pregunta -> ejecutarConsulta($consulta);
@@ -78,30 +78,21 @@ class Pregunta {
 		return $obj_pregunta -> getAfectados();
 	}
 
-	function insertarPregunta() {
+	public function insertarPregunta() {
 		$obj_pregunta = new Consulta();
 		$consulta = "INSERT INTO `encuestas`.`preguntas` (`idPreguntas` ,`enunciado` ,`textoAyuda` ,`tipo` ,`Encuestas_idEncuestas`) VALUES (NULL , '$this->enunciado', '$this->texto_ayuda' , '$this->tipo', '$this->idEncuesta')";
-		$obj_pregunta->ejecutarConsulta($consulta);
-		
-		return $obj_pregunta->getAfectados();
+		$obj_pregunta -> ejecutarConsulta($consulta);
+
+		return $obj_pregunta -> getAfectados();
 	}
-	
-	function eliminar()
-	{
+
+	public function eliminar() {
 		$obj_pregunta = new Consulta();
 		$consulta = "DELETE FROM Preguntas WHERE idPreguntas=$this->id";
-		$obj_pregunta->ejecutarConsulta($consulta);
-		
-		return $obj_pregunta->getAfectados();
+		$obj_pregunta -> ejecutarConsulta($consulta);
+
+		return $obj_pregunta -> getAfectados();
 	}
-	
-	function limpiarCadena($cadena)
-	{
-		$cadena = trim($cadena);
-		$cadena = mysqli_escape_string($cadena);
-		$cadena = htmlspecialchars($cadena);
-		
-		return $cadena;
-	}
+
 }
 ?>
