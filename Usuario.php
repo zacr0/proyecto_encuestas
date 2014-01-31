@@ -6,6 +6,7 @@ class Usuario {
 	private $nick;
 	private $pass;
 	private $nivel;
+	private $email;
 
 	public static function getUsuarios(){
 
@@ -28,10 +29,12 @@ class Usuario {
 			$this-> id = $row["idUsuarios"];
 			$this-> nick=$row["login"];
 			$this-> pass=$row["password"];
+			$this-> email=$row["email"];
 			$this-> nivel=$row["nivel"];
+			
 		}
 	}
-	//Metodso que devuelven valores
+	//Metodos que devuelven valores
 	function getId(){
 		return $this->id;
 	}
@@ -40,6 +43,9 @@ class Usuario {
 	}
 	function getPassword(){
 		return $this->pass;
+	}
+	function getEmail(){
+		return $this->email;
 	}
 	function getNivel(){
 		return $this->nivel;
@@ -55,6 +61,9 @@ class Usuario {
 	function setPassword($val){
 		$this->pass=$val;
 	}
+	function setEmail($val){
+		$this->email=$val;
+	}
 	function setNivel($val){
 		$this->nivel=$val;
 	}
@@ -68,13 +77,13 @@ class Usuario {
 	}
 	function actualizarUsuario(){
 		$obj_usuario= new Consulta();
-		$consulta="UPDATE  encuestas.usuarios SET  login =  '$this->nick',password = '$this->pass',nivel = '$this->nivel' WHERE  usuarios.idUsuarios =$this->id;";
+		$consulta="UPDATE  encuestas.usuarios SET idUsuario=$this->id, login =  '$this->nick',password = '$this->pass',email=$this->email,nivel = '$this->nivel' WHERE  usuarios.idUsuarios =$this->id;";
 		$obj_usuario->ejecutarConsulta($consulta);
 		return $obj_usuario->getAfectados();
 	}
 	function insertarUsuario(){
 		$obj_usuario= new Consulta();
-		$consulta="INSERT INTO `encuestas`.`usuarios` (`idUsuario`, `login`, `password`,`nivel`) VALUES (NULL, '$this->nick', '$this->pass', '$this->nivel');";
+		$consulta="INSERT INTO `encuestas`.`usuarios` (`idUsuario`, `login`, `password`,`email`,`nivel`) VALUES (NULL, '$this->nick', '$this->pass','$this->email', '$this->nivel');";
 		$obj_usuario->ejecutarConsulta($consulta);
 		return $obj_usuario-> getAfectados();
 	}
