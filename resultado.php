@@ -1,5 +1,12 @@
 <?php
- 
+    include 'includes/maquetacion.php';
+    include 'includes/bbdd.php';
+    // Sesion:
+    session_start();
+    if ($_SESSION['nombre'] == '') {
+        header('Location: index.php');
+    }
+
     require('conexion.php');
  
     if(!isset($_GET['id'])){
@@ -12,17 +19,11 @@
     while($result = @mysql_fetch_object($mod)){
         $suma = $result->valor;
     }
- 
+    inicioDocumento("Resultados de la encuesta");
+    navBarLogeado();
 ?>
-<!DOCTYPE HTML>
-<html lang="en-US">
-<head>
-    <meta charset="UTF-8">
-    <title>Sistema de Encuestas</title>
-    <link rel="stylesheet" href="estilos.css">
-</head>
-<body>
-    <div class="wrap">
+
+    <div class="container">
     <form action="" method="post">
 <?php
     $aux = 0;
@@ -31,28 +32,32 @@
  
     while($result = @mysql_fetch_object($req)){
         if($aux == 0){
-                echo "<h1>".$result->titulo."</h1>";
-                echo "<ul class='votacion'>";
+                echo '<div class="col-md-6 col-md-offset-3 text-center">';
+                echo "<h1 class='text-left'>".$result->titulo.":</h1>";
+                echo "<ul class='list-unstyled well well-lg'>";
             $aux = 1;
         }
-        echo '<li><div class="fl">'.$result->nombre.'</div><div class="fr">Votos: '.$result->valor.'</div>';
+        echo '<li><strong>- '.$result->nombre.':</strong><div class="clearfix">Votos: '.$result->valor.'</div>';
         if($suma == 0){
-            echo '<div class="barra cero" style="width:0%;"></div></li>';
+            echo '<div style="width:0%;"></div></li>';
         }else{
-            echo '<div class="barra" style="width:'.($result->valor*100/$suma).'%;">'.round($result->valor*100/$suma).'%</div></li>';
+            echo '<div class="progress progress-striped active"><div class="progress-bar " style="width:'.($result->valor*100/$suma).'%;"><strong>'.round($result->valor*100/$suma).'%</strong></div></div></li>';
         }
  
     }
     echo '</ul>'; 
  
     if(isset($aux)){
-        echo '<span class="fr">Total: '.$suma.'</span>';
-        echo '<a href="encuesta.php?id='.$id.'"" class="volver">← Volver</a>';
+        echo '<strong>Total: </strong>'.$suma;
+        echo '<a href="encuesta.php?id='.$id.'"" class="clearfix"><span class="glyphicon glyphicon-arrow-left"></span> Volver</a>';
     }
  
 ?>
     </ul>
     </form>
     </div>
-</body>
-</html>
+    </div>
+<?php 
+footer();
+finDocumento();
+?>

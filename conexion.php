@@ -1,7 +1,7 @@
 <?php 
 // datos para la coneccion a mysql
 define('DB_SERVER','localhost');
-define('DB_NAME','yolo');
+define('DB_NAME','encuestas');
 define('DB_USER','root');
 define('DB_PASS','root');
  

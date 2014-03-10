@@ -1,4 +1,13 @@
-<?php require('conexion.php');
+<?php
+    include 'includes/maquetacion.php';
+    include 'includes/bbdd.php';
+    require('conexion.php');
+    // Sesion:
+    session_start();
+    if ($_SESSION['nombre'] == '') {
+        header('Location: index.php');
+    }
+
     $cont = 0;
  
     $titulo = ''; if(isset($_POST['titulo'])){ $titulo = trim($_POST['titulo']); } // definimos $titulo para evitar errores, y guardamos su valor por el ingresado.
@@ -43,23 +52,17 @@
             mysql_query($sql); // y ejecutamos el query
         }
     }
+    inicioDocumento('Agregar encuesta');
+    navBarLogeado();
 ?>
-<!DOCTYPE HTML>
-<html lang="en-US">
-<head>
-    <meta charset="UTF-8">
-    <title>Sistema de Encuestas</title>
-    <link rel="stylesheet" href="estilos.css">
-</head>
-<body>
  
-<div class="wrap">
-    <h1>Agregar Encuesta</h1>
-    <form action="" method="post">
+<div class="container">
+    <form class="well well-lg col-md-6 col-md-offset-3" action="" method="post">
+    <header><h1>Agregar encuesta:</h1></header>
  
-    <div class="fl titulo">
-        <label>Titulo:</label>
-        <input name="titulo" type="text" value="<?php echo $titulo; ?>" size="26">
+    <div class="form-group">
+        <label class="lead" for="titulo">Titulo:</label>
+        <input name="titulo" class="form-control" type="text" value="<?php echo $titulo; ?>" size="26">
     </div>
     <?php
         // esto es simplemente un formulario, pero aqui hacemos una condicion, identificamos si se ha definido un numero de opciones, si es si hacemos un bucle, si es no mostramos el select para definir un numero de opciones, como es obvio por defecto se mostrara el bucle:
@@ -67,33 +70,35 @@
         $num = $_POST['opciones']; // guardamos el valor del numero de opciones
         for($i=1;$i<=$num;$i++){ // hacemos el bucle mostrando los campos respectivos.
     ?>
-    <div class="cf">
-        <label>Opcion <?php echo $i; ?>: </label>
-        <input name="opc<?php echo $i; ?>" type="text" size="43">
+    <div class="form-group">
+        <label class="lead">Opcion <?php echo $i; ?>: </label>
+        <input name="opc<?php echo $i; ?>" class="form-control" type="text" size="43" required>
     </div>
     <?php } // aqui termina el bucle ?>
-    <div class="cf">
-        <input name="enviar" type="submit" value="Enviar">
+    <div class="form-group">
+        <button name="enviar" class="btn btn-lg btn-block btn-primary" type="submit">Enviar</button>
         <input name="opciones" type="hidden" value="<?php echo $num; // le pasamos el valor de num al proceso del formulario mediante un campo oculto. ?>">
         <input name="cont" type="hidden" value="<?php echo cont; ?>">
     </div>
     <?php }else{ // sino se ha definido nro de opciones: ?>
-    <div class="fl">
-        <label>Nº de opciones:</label>
-        <select name="opciones">
-            <?php for($i=2;$i<=20;$i++){ // esto es un loop simple, solo para ahorrarnos trabajo, este select tendra de 2 a 20 opciones, si deseas cambiarlo lo puedes hacer aqui. ?>
+    <div class="form-group">
+        <label class="lead">Nº de opciones:</label>
+        <select class="form-control" name="opciones">
+            <?php for($i=2;$i<=5;$i++){ // esto es un loop simple, solo para ahorrarnos trabajo, este select tendra de 2 a 20 opciones, si deseas cambiarlo lo puedes hacer aqui. ?>
             <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
             <?php } ?>
         </select>
     </div>
  
-    <div class="cf">
-        <input name="opc" type="submit" value="Continuar">
+    <div class="form-group">
+        <button name="opc" class="btn btn-primary btn-block" type="submit">Continuar</button>
     </div>
  
       <?php } // Sino se han definido opciones, que en vez de salir el boton de Enviar, salga uno que sea Continuar. ?>
-    <a href="index.php" class="volver">← Volver</a>
+    <a href="index.php" class="volver"><span class="glyphicon glyphicon-arrow-left"></span> Volver</a>
     </form>
     </div>
-</body>
-</html>
+<?php
+footer();
+finDocumento();
+?>
