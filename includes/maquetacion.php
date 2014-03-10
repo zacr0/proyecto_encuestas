@@ -82,7 +82,7 @@ function navBarLogeado()
 	                	<li><a href="agregar.php"><span class="glyphicon glyphicon-plus"></span> Nueva encuesta</a></li>
 	                </ul>
 	                <ul class="nav navbar-nav navbar-right">
-        				<li><a href="mensajes.php">Usuario: ' . $_SESSION['nombre'] . '</a></li>
+        				<li><a href="index.php">Usuario: ' . $_SESSION['nombre'] . '</a></li>
 	                	<li><a href="cerrarsesion.php" class="btn btn-danger">Cerrar Sesión</a></li>
         			</ul>
 	            </div>
