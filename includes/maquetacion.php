@@ -4,7 +4,7 @@ function inicioDocumento($titulo) {
 	<html lang="es">
 		<head>
 			<meta charset="UTF-8">
-			<title>Sistema de encuestas</title>
+			<title>Sistema de respuestas</title>
 			<link rel="stylesheet" href="css/bootstrap.min.css">
 		</head>
 		<body>';
