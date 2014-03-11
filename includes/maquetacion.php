@@ -64,18 +64,18 @@ function formularioBusqueda1()
 
 function formularioBusqueda()
 {
-	echo '<div class="container pull-right">
+	echo '<div class="container">
 		<div class="row">
-			<div class="col-md-4">
+			<form class="col-md-3 col-md-offset-4" method="post">
 	            <div class="input-group" style="margin-top:5px;">
-	              <input type="text" class="form-control">
+	              <input type="text" name="busqueda" class="form-control" placeholder="Buscar encuesta...">
 	              <span class="input-group-btn">
-	              	<button class="btn btn-default" type="submit">
+	              	<button name="buscar" class="btn btn-primary" type="submit">
 	              <span class="glyphicon glyphicon-search"></span>
 	             </button>
 	             </span>
-	             </div><!-- /input-group -->
-	        </div>
+	             </div>
+	        </form>
 		</div>
 	</div>';
 }
@@ -110,7 +110,7 @@ function navBarLogeado()
 	            </div>
 	        	<div class="navbar-collapse collapse">
 	                <ul class="nav navbar-nav">
-	                	<li><a href="index.php">Inicio</a></li>
+	                	<li><a href="index.php">Encuestas</a></li>
 	                	<li><a href="agregar.php"><span class="glyphicon glyphicon-plus"></span> Nueva encuesta</a></li>
 	                </ul>
 	                <ul class="nav navbar-nav navbar-right">

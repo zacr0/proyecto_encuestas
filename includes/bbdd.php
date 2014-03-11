@@ -54,6 +54,7 @@ function haRespondido($idUsuario,$idEncuesta)
 		return false;
 	}
 	return true;
+	$db = null;
 }
 
 function responderEncuesta($idUsuario, $idEncuesta)
@@ -64,5 +65,29 @@ function responderEncuesta($idUsuario, $idEncuesta)
 	if (!$resultado->execute()) {
 		echo '<h2 class="text-danger">No se ha podido realizar la votación.</h2>';
 	}
+	$db = null;
+}
+
+function buscarEncuestas($busqueda)
+{
+	$db = conectarDB();
+	$consultaCuenta = 'SELECT COUNT(*) FROM encuestas WHERE id IN (SELECT id FROM encuestas WHERE titulo LIKE "%' . $busqueda . '%")';
+	$resultadoCuenta = $db->prepare($consultaCuenta);
+	$resultadoCuenta->execute();
+	if ($resultadoCuenta->fetchColumn() != 0) {
+		$consulta = 'SELECT id,titulo FROM encuestas WHERE titulo LIKE "%' . $busqueda . '%"';
+		$resultado = $db->prepare($consulta);
+		if ($resultado->execute()) {
+			foreach ($resultado as $encuesta) {
+				echo '<li class="list-group-item ">
+				<a class="lead" href="encuesta.php?id=' . $encuesta['id'] . '">' . $encuesta['titulo'] . '</a>
+				<a href="resultado.php?id=' . $encuesta['id'] . '" class="pull-right">Ver Resultados <span class="glyphicon glyphicon-arrow-right"></span></a>
+				</li>';
+			}
+		}
+	} else {
+		echo '<p class="lead">No se encontraron encuestas similares a ' . $busqueda . '</p>';
+	}
+	$db = null;
 }
 ?>
