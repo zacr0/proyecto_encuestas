@@ -106,9 +106,9 @@ function footer()
 	echo '<div class="row text-center">
 		<hr>
 		<p>Autores:</p>
-		<p>Francisco Morales Urbano</p>
-		<p>Pablo Medina Suárez</p>
-		<p>Rafael Urbano Jiménez</p>
+		<p><a href="https://github.com/riberot">Francisco Morales Urbano</a></p>
+		<p><a href="https://github.com/zacr0/proyecto_encuestas">Pablo Medina Suárez</a></p>
+		<p><a href="https://github.com/rurbanojimenez">Rafael Urbano Jiménez</a></p>
 		<p>&copy;&copy; - 2014</p>
 	</div>';
 }
