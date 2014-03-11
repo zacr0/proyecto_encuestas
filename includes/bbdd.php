@@ -43,4 +43,26 @@ function loginUsuario($nombre,$password)
 	}
 	$db = null;
 }
+
+function haRespondido($idUsuario,$idEncuesta)
+{
+	$db = conectarDB();
+	$consulta = 'SELECT * FROM encuestas_respondidas WHERE id_usuario="' . $idUsuario . '" AND id_encuesta="' . $idEncuesta . '"';
+	$resultado = $db->prepare($consulta);
+	$resultado->execute();
+	if ($resultado->fetchColumn() == 0) {
+		return false;
+	}
+	return true;
+}
+
+function responderEncuesta($idUsuario, $idEncuesta)
+{
+	$db = conectarDB();
+	$consulta = 'INSERT INTO encuestas_respondidas (id_usuario, id_encuesta) VALUES ('.$idUsuario.','.$idEncuesta.')';
+	$resultado = $db->prepare($consulta);
+	if (!$resultado->execute()) {
+		echo '<h2 class="text-danger">No se ha podido realizar la votación.</h2>';
+	}
+}
 ?>

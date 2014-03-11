@@ -7,7 +7,7 @@
         header('Location: index.php');
     }
 
-    require('conexion.php');
+    $conexion = mysqli_connect("localhost","root","root", "encuestas");
  
     if(!isset($_GET['id'])){
         header('location: index.php');
@@ -15,8 +15,8 @@
  
     $suma = 0;
     $id = $_GET['id'];
-    $mod = @mysql_query("SELECT SUM(valor) as valor FROM opciones WHERE id_encuesta = ".$id);
-    while($result = @mysql_fetch_object($mod)){
+    $mod = @mysqli_query($conexion,"SELECT SUM(valor) as valor FROM opciones WHERE id_encuesta = ".$id);
+    while($result = @mysqli_fetch_object($mod)){
         $suma = $result->valor;
     }
     inicioDocumento("Resultados de la encuesta");
@@ -28,9 +28,9 @@
 <?php
     $aux = 0;
     $sql = "SELECT a.titulo as titulo, a.fecha as fecha, b.id as id, b.nombre as nombre, b.valor as valor FROM encuestas a INNER JOIN opciones b ON a.id = b.id_encuesta WHERE a.id = ".$id;
-    $req = @mysql_query($sql);
+    $req = @mysqli_query($conexion,$sql);
  
-    while($result = @mysql_fetch_object($req)){
+    while($result = @mysqli_fetch_object($req)){
         if($aux == 0){
                 echo '<div class="col-md-6 col-md-offset-3 text-center">';
                 echo "<h1 class='text-left'>".$result->titulo.":</h1>";
@@ -49,7 +49,7 @@
  
     if(isset($aux)){
         echo '<strong>Total: </strong>'.$suma;
-        echo '<a href="encuesta.php?id='.$id.'"" class="clearfix"><span class="glyphicon glyphicon-arrow-left"></span> Volver</a>';
+        echo '<a href="index.php" class="clearfix"><span class="glyphicon glyphicon-arrow-left"></span> Volver</a>';
     }
  
 ?>

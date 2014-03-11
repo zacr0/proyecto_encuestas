@@ -48,6 +48,38 @@ function formularioRegistro() {
 	</form>';
 }
 
+function formularioBusqueda1()
+{
+	echo '<div class="row">
+		<form action="" role="search" class="">
+    		<div class="input-group">
+      			<input type="text" class="form-control" placeholder="Buscar encuesta...">
+      			<span class="input-group-btn">
+        			<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+      			</span>
+    		</div>
+		</form>
+	</div>';
+}
+
+function formularioBusqueda()
+{
+	echo '<div class="container pull-right">
+		<div class="row">
+			<div class="col-md-4">
+	            <div class="input-group" style="margin-top:5px;">
+	              <input type="text" class="form-control">
+	              <span class="input-group-btn">
+	              	<button class="btn btn-default" type="submit">
+	              <span class="glyphicon glyphicon-search"></span>
+	             </button>
+	             </span>
+	             </div><!-- /input-group -->
+	        </div>
+		</div>
+	</div>';
+}
+
 function navBar()
 {
 	echo '<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
@@ -112,5 +144,4 @@ function footer()
 		<p>&copy;&copy; - 2014</p>
 	</div>';
 }
-
 ?>

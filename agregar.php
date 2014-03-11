@@ -1,7 +1,7 @@
 <?php
     include 'includes/maquetacion.php';
     include 'includes/bbdd.php';
-    require('conexion.php');
+    $conexion = mysqli_connect("localhost","root","root", "encuestas");
     // Sesion:
     session_start();
     if ($_SESSION['nombre'] == '') {
@@ -18,14 +18,14 @@
             $fecha = date('Y-m-d');
  
             $sql= "INSERT INTO `encuestas` (`id` ,`titulo` ,`fecha`) VALUES (NULL ,  '$titulo', '$fecha');"; // si han ingresado si quiera un titulo insertamos esta encuesta en la tabla
-            mysql_query($sql);
+            mysqli_query($conexion,$sql);
  
             $sql = "SELECT MAX(id) as id FROM encuestas"; // ahora obtenemos el id de la ultima fila,
                                                           // la que acabamos de ingresar,
                                                           // esto lo hacemos para poder asociarle las opciones
-            $req =  mysql_query($sql);
+            $req =  mysqli_query($conexion,$sql);
  
-            while($result = mysql_fetch_object($req)){
+            while($result = mysqli_fetch_object($req)){
                 $id_encuesta = $result->id;  // con el resultado obtenido hacemos un bucle y definimos los resultados como id_encuesta.
             }
  
@@ -45,11 +45,11 @@
  
             if($cont < 2){ // si el usuario no definio ninguna opcion, se elimina la encuesta recien creada, esto es poco probable que suceda ya que la definicion de opciones la haremos con un select, y aqui se seleccionara el valor de 2 por defecto.
                 $sql = "DELETE FROM `encuestas` WHERE id = ".$id_encuesta;
-                echo "<div class='error'>Tiene que llevar por lo menos 2 opciones.</div>";
+                echo "<div class='text-danger'>Tiene que llevar por lo menos 2 opciones.</div>";
             }else{
                 header('location: index.php'); // por ultimo si todo salio bien, redireccionamos al index para que el usuario vea su encuesta recien creada.
             }
-            mysql_query($sql); // y ejecutamos el query
+            mysqli_query($conexion,$sql); // y ejecutamos el query
         }
     }
     inicioDocumento('Agregar encuesta');
@@ -95,7 +95,7 @@
     </div>
  
       <?php } // Sino se han definido opciones, que en vez de salir el boton de Enviar, salga uno que sea Continuar. ?>
-    <a href="index.php" class="volver"><span class="glyphicon glyphicon-arrow-left"></span> Volver</a>
+    <a href="index.php"><span class="glyphicon glyphicon-arrow-left"></span> Volver</a>
     </form>
     </div>
 <?php
